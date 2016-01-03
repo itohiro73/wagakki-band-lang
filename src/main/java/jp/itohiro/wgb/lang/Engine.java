@@ -15,8 +15,9 @@ public class Engine {
         String remainder = line;
         while(!remainder.trim().isEmpty()) {
             for(Code code: Code.values()) {
-                if (remainder.startsWith(code.op)) {
-                    remainder = remainder.substring(code.op.length(), remainder.length());
+                if (remainder.startsWith(code.op())) {
+                    String trimmed = remainder.trim();
+                    remainder = trimmed.substring(code.op().length(), trimmed.length()).trim();
                     codes.add(code);
                     break;
                 }
@@ -38,42 +39,42 @@ public class Engine {
 
     protected enum Code
     {
-        GT(">"){
+        GT("山葵"){
             @Override
             int operate(int cp) {
                 index++;
                 return cp;
             }
         },
-        LD("<"){
+        LD("黒流"){
             @Override
             int operate(int cp) {
                 index--;
                 return cp;
             }
         },
-        PLUS("+"){
+        PLUS("いぶくろ聖志"){
             @Override
             int operate(int cp) {
                 values[index]++;
                 return cp;
             }
         },
-        MINUS("-"){
+        MINUS("蜷川べに"){
             @Override
             int operate(int cp) {
                 values[index]--;
                 return cp;
             }
         },
-        DOT("."){
+        DOT("鈴華ゆう子"){
             @Override
             int operate(int cp) {
                 System.out.write(values[index]);
                 return cp;
             }
         },
-        COMMA(","){
+        COMMA("亜沙"){
             @Override
             int operate(int cp) {
                 try {
@@ -84,7 +85,7 @@ public class Engine {
                 return cp;
             }
         },
-        START("["){
+        START("神永大輔"){
             @Override
             int operate(int cp) {
                 if(values[index]==0){
@@ -106,7 +107,7 @@ public class Engine {
                 return -1;
             }
         },
-        END("]"){
+        END("町屋"){
             @Override
             int operate(int cp) {
                 int nest = 1;
