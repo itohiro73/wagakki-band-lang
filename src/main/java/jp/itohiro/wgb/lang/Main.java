@@ -3,10 +3,7 @@ package jp.itohiro.wgb.lang;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -18,18 +15,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String sourceFile="";
         Properties p = new Properties();
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(Paths.get(Main.class.getClassLoader().getResource("wgb.properties").getPath()).toFile()), Charset.forName("UTF-8"));
+        InputStreamReader inputStreamReader = new InputStreamReader(Main.class.getClassLoader().getResourceAsStream("wgb.properties"), Charset.forName("UTF-8"));
         if(args.length == 1){
             sourceFile = args[0];
         }
         else if(args.length == 2){
             String propertiesFile = args[0];
-            URL propertiesFileResource = Main.class.getClassLoader().getResource(propertiesFile);
-            if(propertiesFileResource == null){
+            InputStream propertiesFileInputStream = Main.class.getClassLoader().getResourceAsStream(propertiesFile);
+            if(propertiesFileInputStream == null){
                 throw new FileNotFoundException("Properties file not existing: " + propertiesFile);
             }
-            String propertiesFilePath = propertiesFileResource.getPath();
-            inputStreamReader = new InputStreamReader(new FileInputStream(Paths.get(propertiesFilePath).toFile()), Charset.forName("UTF-8"));
+            inputStreamReader = new InputStreamReader(propertiesFileInputStream, Charset.forName("UTF-8"));
             sourceFile = args[1];
         }
         else{
