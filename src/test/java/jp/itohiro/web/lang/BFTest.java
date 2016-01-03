@@ -17,10 +17,8 @@ public class BFTest {
     @Test
     public void testHelloWorld() throws Exception {
         URL testFilePath = BFTest.class.getClassLoader().getResource("helloworld.txt");
-        URL propertiesFilePath = BFTest.class.getClassLoader().getResource("bf.properties");
         Assert.assertNotNull(testFilePath);
-        Assert.assertNotNull(propertiesFilePath);
-        Main.main(new String[]{testFilePath.getPath(), propertiesFilePath.getPath()});
+        Main.main(new String[]{"bf.properties", testFilePath.getPath()});
         Assert.assertThat(inOutTestResource.getOutputStream().toByteArray(), is("Hello World!\n".getBytes()));
     }
 }

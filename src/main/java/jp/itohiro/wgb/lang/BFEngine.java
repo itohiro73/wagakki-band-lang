@@ -4,14 +4,17 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 
 import java.io.IOException;
+import java.util.Properties;
 
-public class Engine {
+public class BFEngine {
+    private static Properties properties;
     private int length;
     private static MutableList<Code> codes = Lists.mutable.empty();
     private static int index;
     private static char[] values;
 
-    public Engine(String line){
+    public BFEngine(String line, Properties properties){
+        BFEngine.properties = properties;
         String remainder = line;
         while(!remainder.trim().isEmpty()) {
             for(Code code: Code.values()) {
@@ -131,7 +134,7 @@ public class Engine {
         private final String op;
 
         Code(String op){
-            this.op = System.getProperty(op);
+            this.op = properties.getProperty(op);
         }
 
         private String op(){

@@ -16,10 +16,8 @@ public class WagakkiBandLangTest {
     @Test
     public void testHelloWorld() throws Exception {
         URL testFilePath = BFTest.class.getClassLoader().getResource("helloworld_wgb.txt");
-        URL propertiesFilePath = BFTest.class.getClassLoader().getResource("wgb.properties");
         Assert.assertNotNull(testFilePath);
-        Assert.assertNotNull(propertiesFilePath);
-        Main.main(new String[]{testFilePath.getPath(), propertiesFilePath.getPath()});
+        Main.main(new String[]{testFilePath.getPath()});
         Assert.assertThat(inOutTestResource.getOutputStream().toByteArray(), is("Hello World!\n".getBytes()));
     }
 }
