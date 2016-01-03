@@ -39,42 +39,42 @@ public class Engine {
 
     protected enum Code
     {
-        GT("山葵"){
+        GT(">"){
             @Override
             int operate(int cp) {
                 index++;
                 return cp;
             }
         },
-        LD("黒流"){
+        LD("<"){
             @Override
             int operate(int cp) {
                 index--;
                 return cp;
             }
         },
-        PLUS("いぶくろ聖志"){
+        PLUS("+"){
             @Override
             int operate(int cp) {
                 values[index]++;
                 return cp;
             }
         },
-        MINUS("蜷川べに"){
+        MINUS("-"){
             @Override
             int operate(int cp) {
                 values[index]--;
                 return cp;
             }
         },
-        DOT("鈴華ゆう子"){
+        DOT("."){
             @Override
             int operate(int cp) {
                 System.out.write(values[index]);
                 return cp;
             }
         },
-        COMMA("亜沙"){
+        COMMA(","){
             @Override
             int operate(int cp) {
                 try {
@@ -85,7 +85,7 @@ public class Engine {
                 return cp;
             }
         },
-        START("神永大輔"){
+        START("["){
             @Override
             int operate(int cp) {
                 if(values[index]==0){
@@ -107,7 +107,7 @@ public class Engine {
                 return -1;
             }
         },
-        END("町屋"){
+        END("]"){
             @Override
             int operate(int cp) {
                 int nest = 1;
@@ -131,8 +131,7 @@ public class Engine {
         private final String op;
 
         Code(String op){
-
-            this.op = op;
+            this.op = System.getProperty(op);
         }
 
         private String op(){
